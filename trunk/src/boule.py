@@ -19,6 +19,7 @@ class Boule:
 	        self.clock = sf.Clock()
 	        self.img = sf.Image()
 	        self.sprite = sf.Sprite(self.img)
+	        self.type = ""
 
 	def Move(self):
 		# Temps écoulé depuis le dernier calcul

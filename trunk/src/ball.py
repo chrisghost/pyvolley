@@ -38,3 +38,7 @@ class Ball(boule.Boule):
 	def __init__(self, m, r, p0=complex(200, 300), v0=complex(0, 122), a0=complex(0, 0.15), friction=0.5, bounce_friction=0.03, name="balle"):
 		
  		boule.Boule.__init__(self, m, r, p0, v0, a0, friction, bounce_friction, name)
+ 		self.type = "balle"
+ 		self.img = sf.Image()
+ 		self.img.LoadFromFile("img/volleyball.png")
+ 		self.sprite = sf.Sprite(self.img)

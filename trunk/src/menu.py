@@ -4,6 +4,7 @@ import random
 import cmath
 import ig
 import jeu
+import kinput
 
 class menu:
 #    window = sf.RenderWindow(sf.VideoMode(800, 600), "pyVolley")
@@ -60,7 +61,12 @@ class menu:
         self.ig.bouton(1, 10, 300, "Quitter", 0)
         self.ig.init_detect()
         
+	self.input = kinput.kInput(self.window)
+        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.Right, self.setState, False)
+        
         while self.state :
+        	
+	        	self.input.Scan()
 
 			self.Next()
 
