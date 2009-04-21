@@ -2,8 +2,10 @@
 from PySFML import sf
 import anim
 import cmath
+import boule
 
-class Personnage:
+class Personnage(boule.Boule):
+	"""
     jump = False
     img = sf.Image()
     force_img = sf.Image()
@@ -32,69 +34,80 @@ class Personnage:
     immobilisation = 0
     moteur_p = 0
     velx_prec = 0
-    
-    def getType(self):
-    	return "personnage"
+"""
+	def __init__(self, w, p0, bar_x, bar_y, position, name, moteur_p, carte):
+    	
+ 		boule.Boule.__init__(self, 500, 25, p0, complex(0, 0), complex(0, 0.15), 0.5, 0.03, "personnage")
+#        self.p = complex(150,400) # position initiale
+#        self.v = complex(0, 0)
+#        self.r = 25
+#        self.m = 500
+#        self.bounce_friction = 0.1
+        	self.carte = carte
+#        self.friction = 1
+#        self.a=complex(0, 0.15)
+        
+        	self.adr = ["img/pers.png","img/pers_force.png","img/bar.png","img/energie_bar.png"]
+        
+        	self.position = position
+        
+        	self.LoadImgs()
 
-    def __init__(self, w, p0, bar_x, bar_y, position, name, moteur_p, carte):
-        self.p = complex(150,400) # position initiale
-        self.v = complex(0, 0)
-        self.r = 25
-        self.m = 500
-        self.bounce_friction = 0.1
-        self.carte = carte
-        self.friction = 1
-        self.a=complex(0, 0.15)
+        	self.sprite_pers = sf.Sprite(self.img)
         
-        self.adr = ["img/pers.png","img/pers_force.png","img/bar.png","img/energie_bar.png"]
-        
-        self.position = position
-        
-        self.LoadImgs()
+		self.w = w
+		
+		self.type = "personnage"
 
-        self.sprite_pers = sf.Sprite(self.img)
-        
-	self.w = w
-        
+	def LoadImgs(self):
+		if not self.img.LoadFromFile(self.adr[0]) :
+			print "Error loading file : "+self.adr[0]
+		else :
+			print self.adr[0]+"   OK"
+""" 
+		if not self.force_img.LoadFromFile(self.adr[1]) :
+			print "Error loading file : "+self.adr[1]
+		else :
+			print self.adr[1]+"   OK"
+		if not self.barre_energie_vide.LoadFromFile(self.adr[2]) :
+			print "Error loading file: "+self.adr[2]
+		else :
+			print self.adr[2]+"   OK"
+		if not self.barre_energie.LoadFromFile(self.adr[3]) :
+			print "Error loading file :"+self.adr[3]
+		else :
+			print self.adr[3]+"   OK"
+   
+   
+ETAIT DANS LE CONSRTUCTEUR
 
-        self.sprite_barre_energie_vide = sf.Sprite(self.barre_energie_vide)
-        self.sprite_barre_energie_vide.SetX(bar_x)
-        self.sprite_barre_energie_vide.SetY(bar_y)
+       		self.sprite_barre_energie_vide = sf.Sprite(self.barre_energie_vide)
+        	self.sprite_barre_energie_vide.SetX(bar_x)
+        	self.sprite_barre_energie_vide.SetY(bar_y)
         
-        self.sprite_barre_energie = sf.Sprite(self.barre_energie)
-    	self.sprite_barre_energie.SetSubRect(sf.IntRect(0,0,0,2))
+        	self.sprite_barre_energie = sf.Sprite(self.barre_energie)
+    		self.sprite_barre_energie.SetSubRect(sf.IntRect(0,0,0,2))
+	
+    		if position == 1 :
+    			self.sprite_barre_energie.SetX(bar_x+12)
+    		else :
+    			self.sprite_barre_energie.SetX(bar_x+170+12)	
+    		self.sprite_barre_energie.SetY(bar_y+12)
+        
+        	self.jump = False
+    		self.feu = False
+    		self.name = name
+    		self.moteur_p = moteur_p
 
-    	if position == 1 :
-    		self.sprite_barre_energie.SetX(bar_x+12)
-    	else :
-    		self.sprite_barre_energie.SetX(bar_x+170+12)	
-    	self.sprite_barre_energie.SetY(bar_y+12)
-        
-        self.jump = False
-    	self.feu = False
-    	self.name = name
-    	self.moteur_p = moteur_p
+        	self.sprite_pers.SetPosition(self.p.real, self.p.imag)
 
-        self.sprite_pers.SetPosition(self.p.real, self.p.imag)
-        
-    def LoadImgs(self):
-        if not self.img.LoadFromFile(self.adr[0]) :
-            print "Error loading file : "+self.adr[0]
-        else :
-            print self.adr[0]+"   OK"
-        if not self.force_img.LoadFromFile(self.adr[1]) :
-            print "Error loading file : "+self.adr[1]
-        else :
-            print self.adr[1]+"   OK"
-        if not self.barre_energie_vide.LoadFromFile(self.adr[2]) :
-            print "Error loading file: "+self.adr[2]
-        else :
-            print self.adr[2]+"   OK"
-        if not self.barre_energie.LoadFromFile(self.adr[3]) :
-            print "Error loading file :"+self.adr[3]
-        else :
-            print self.adr[3]+"   OK"
-        
+   
+ETAIT DANS LE CONSRTUCTEUR
+
+   
+   
+   
+   
     def Bounce(self,i):
         self.v = complex(self.v.real*-1,self.v.imag)
 
@@ -400,3 +413,4 @@ class Personnage:
         self.vely=yn
     def getName(self):
         return self.name
+"""
