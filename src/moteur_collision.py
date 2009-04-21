@@ -26,10 +26,13 @@ class moteur_collision :
 		 	self.pile_balles[i].Move()
 		 	
 		 	if self.estDansLaMap(self.pile_balles[i].getx(), self.pile_balles[i].gety()) :
-				if self.carte.RoughlyCheckCollision(self.pile_balles[i].p.real+self.pile_balles[i].r, self.pile_balles[i].p.imag+self.pile_balles[i].r, self.pile_balles[i].r) and self.pile_balles[i].getType() != "personnage" and self.pile_balles[i].p.imag >= 0: # Dￃﾩtection de collision approximative
+				if self.carte.RoughlyCheckCollision(self.pile_balles[i].p.real+self.pile_balles[i].r, self.pile_balles[i].p.imag+self.pile_balles[i].r, self.pile_balles[i].r) and self.pile_balles[i].p.imag >= 0: # Dￃﾩtection de collision approximative
 					collision_data = self.carte.CheckCollision(self.pile_balles[i].p.real+self.pile_balles[i].r, self.pile_balles[i].p.imag+self.pile_balles[i].r, self.pile_balles[i].r) # Dￃﾩtection prￃﾩcise
 					if collision_data != 42:
-						self.pile_balles[i].Bounce(collision_data)
+						if self.pile_balles[i].getType() != "personnage" :
+							self.pile_balles[i].Bounce(collision_data)
+						else :
+							self.pile_balles[i].StopVertical()
 			elif self.pile_balles[i].p.imag <= 0 : # balle au dessus de l'écran
 				if self.pile_balles[i].p.real <= 0 or self.pile_balles[i].p.real >= self.carte.getW(): # contacte avec un bord (x)
 					self.pile_balles[i].v = complex(-self.pile_balles[i].v.real, self.pile_balles[i].v.imag)

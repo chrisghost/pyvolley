@@ -23,7 +23,7 @@ class jeu:
         print "Initialisation Gestionnaire de particules"
         self.moteur_p = moteur_particule.moteur_particule(ig)
         print "Création des joueurs"
-        self.j1 = pers.Personnage(window, 100 + 400j, 10, 10, 1, "Marie", self.moteur_p, self.carte)
+        self.j1 = pers.Personnage(window, 100 + 500j, 10, 10, 1, "Marie", self.moteur_p, self.carte)
         print "Création des balles"
         self.ballon = ball.Ball(10, 25, 120 + 100j, 0 + 0j, 250j, 0.2, 0.04, "balle de fou")
         

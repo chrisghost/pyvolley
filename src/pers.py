@@ -37,7 +37,7 @@ class Personnage(boule.Boule):
 """
 	def __init__(self, w, p0, bar_x, bar_y, position, name, moteur_p, carte):
     	
- 		boule.Boule.__init__(self, 500, 25, p0, complex(0, 0), complex(0, 0.15), 0.5, 0.03, "personnage")
+ 		boule.Boule.__init__(self, 500, 25, p0, complex(0, 30), complex(0, 0.15), 0.5, 0.03, "personnage")
 #        self.p = complex(150,400) # position initiale
 #        self.v = complex(0, 0)
 #        self.r = 25
@@ -53,11 +53,16 @@ class Personnage(boule.Boule):
         
         	self.LoadImgs()
 
-        	self.sprite_pers = sf.Sprite(self.img)
+        	self.sprite = sf.Sprite(self.img)
         
 		self.w = w
 		
 		self.type = "personnage"
+
+
+	def StopVertical(self):
+		self.v = complex(self.v.real, 0)
+
 
 	def LoadImgs(self):
 		if not self.img.LoadFromFile(self.adr[0]) :
@@ -414,3 +419,4 @@ ETAIT DANS LE CONSRTUCTEUR
     def getName(self):
         return self.name
 """
+
