@@ -1,5 +1,6 @@
 # coding=UTF-8
 from PySFML import sf
+import boule
 import pers
 import ball
 import obstacle
@@ -56,7 +57,8 @@ class jeu:
             ig.fps()
         
     def iteration(self, Input):            
-            self.j1.manage_keys(Input)
+             #self.j1.manage_keys(Input)
+             pass
         
     def afficher_tout(self):
         self.window.Clear(sf.Color(0,0,0))  

@@ -23,7 +23,7 @@ class moteur_collision :
 				a.setpos(100,100)
 
 		for i in range(len(self.pile_balles)):
-		 	self.pile_balles[i].Move(self.w)
+		 	self.pile_balles[i].Move()
 		 	
 		 	if self.estDansLaMap(self.pile_balles[i].getx(), self.pile_balles[i].gety()) :
 				if self.carte.RoughlyCheckCollision(self.pile_balles[i].p.real+self.pile_balles[i].r, self.pile_balles[i].p.imag+self.pile_balles[i].r, self.pile_balles[i].r) and self.pile_balles[i].getType() != "personnage" and self.pile_balles[i].p.imag >= 0: # Dￃﾩtection de collision approximative
