@@ -1,0 +1,15 @@
+   55   133  1311 anim.py
+  269  1178  9517 ball.py
+  489  2369 14914 bmp.py
+  135   325  2971 ig.py
+  121   303  3989 jeu.py
+   22    47   462 main.py
+  119   530  4074 map.py
+   94   208  2463 menu.py
+  121   476  4610 moteur_collision.py
+   70   162  1498 moteur_ennemis.py
+  102   322  2941 moteur_particule.py
+   42   164   979 obstacle.py
+   50   126  1253 particule.py
+  400  1446 13922 pers.py
+ 2089  7789 64904 total
