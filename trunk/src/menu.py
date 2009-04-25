@@ -20,6 +20,9 @@ class menu:
 #    arme_sp = sf.Sprite(arme)
     state = True
     
+    def none(self, a):
+    	print "NONE"
+    
     def setNext(self, s):
     	self.next = s
     def setState(self, s):
@@ -34,7 +37,7 @@ class menu:
     		#Options
             pass
         else :
-        	print ""
+        	pass
 
 
     def __init__(self, window):
@@ -62,8 +65,15 @@ class menu:
         self.ig.init_detect()
         
 	self.input = kinput.kInput(self.window)
-        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.Right, self.setState, False)
+#        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.F15, self.none, (False))
+        self.input.AddEvent(sf.Event.KeyReleased, sf.Key.F15, self.none, (False))
+#        self.input.AddEvent(sf.Event.MouseButtonPressed, sf.Mouse.Count, self.none, (False))
+        self.input.AddEvent(sf.Event.MouseButtonReleased, sf.Mouse.Left, self.none, (False))
         
+	self.input.AddEvent(sf.Event.KeyPressed, sf.Key.N, self.setNext, (1))
+        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.Escape, self.setState, (False))
+        self.input.AddEvent(sf.Event.MouseButtonPressed, sf.Mouse.Left, self.moteur_p.new_meteor, (200, 200,800)) 
+						
         while self.state :
         	
 	        	self.input.Scan()
@@ -79,10 +89,7 @@ class menu:
 			while self.window.GetEvent(event):
 				if event.Type == sf.Event.Closed:
 					self.window.Close()
-				if event.Type == sf.Event.MouseButtonPressed :
-						x = Input.GetMouseX()
-						y = Input.GetMouseY()
-						self.moteur_p.new_meteor(x,y,self.window.GetWidth())
+
 							
 			self.ig.fps()
 			
