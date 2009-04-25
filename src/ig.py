@@ -89,7 +89,7 @@ class ig :
 		sc.SetX(x+10)
 		sd.SetX(x+10+largeur_c)
 		
-		sc.SetSubRect(sf.IntRect(0,0,largeur_c,50))		
+		sc.SetSubRect(sf.IntRect(0,0,int(largeur_c),50))		
 		
 		sg.SetY(y)
 		sc.SetY(y)

@@ -15,6 +15,15 @@ class kInput:
         self.event = sf.Event() #Création de l'instance chargées de gérer les évènements
  
         self.fonctions = {}
+        '''
+        self.fonctions[sf.Event.KeyReleased] = {}
+        self.fonctions[sf.Event.KeyPressed] = {}
+        self.fonctions[sf.Event.MouseButtonPressed] = {}
+        self.fonctions[sf.Event.MouseButtonReleased] = {}
+        self.fonctions[sf.Event.JoyButtonPressed] = {}
+        self.fonctions[sf.Event.JoyButtonReleased] = {}
+        self.fonctions[sf.Event.JoyMoved] = {}
+        '''
  
     def AddEvent(self, type, key, fonction, argument):
         """
@@ -52,8 +61,11 @@ class kInput:
                 code = event.JoyButton.Button
             elif event.Type == sf.Event.JoyMoved:
                 code = event.JoyMove.Axis
-
-	    a = fonc.get(event.Type)
-            if a != None :
-		if a.has_key(code):
-                	fonc[event.Type][code][0](event, fonc[event.Type][code][1])
+	if code != None :
+		print "code!=none"
+		if len(self.fonctions.get(event.Type)) :
+			print "len"
+			if code in self.fonctions.get(event.Type):
+				print "code in"
+				print self.fonctions[event.Type][code][0], self.fonctions[event.Type][code][1]
+    	    	       		self.fonctions[event.Type][code][0](event, self.fonctions[event.Type][code][1])
