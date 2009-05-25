@@ -1,0 +1,29 @@
+import random
+from PySFML import sf
+
+class moteur_control:
+	
+	def __init__(self,jeu, display):
+		self.input = display.GetInput() 
+		self.get_events = display.GetEvent 
+		self.event = sf.Event()
+		self.jeu = jeu
+		self.pilej = []
+
+	def addplayer(self, p):
+		self.pilej.append(p)
+
+	def Scan(self):
+		event = self.event
+		while self.get_events(event):
+			if event.Type == sf.Event.MouseButtonPressed :
+				self.jeu.moteur_p.new_meteor(event.MouseButton.X, event.MouseButton.Y, 800)
+		                """
+			if event.Type == sf.Event.KeyPressed or event.Type == sf.Event.KeyReleased :
+				if event.Key.Code == sf.Key.Left :
+					self.pilej[0].evolution(2)
+				elif event.Key.Code == sf.Key.Right :
+					self.pilej[0].evolution(1)
+				elif event.Key.Code == sf.Key.Up :
+					self.pilej[0].evolution(3)
+				""2
