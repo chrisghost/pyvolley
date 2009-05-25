@@ -5,6 +5,7 @@ import cmath
 import boule
 
 class Personnage(boule.Boule):
+        vel_moving = 2
 	"""
     jump = False
     img = sf.Image()
@@ -34,7 +35,7 @@ class Personnage(boule.Boule):
     immobilisation = 0
     moteur_p = 0
     velx_prec = 0
-"""
+        """
 	def __init__(self, w, p0, bar_x, bar_y, position, name, moteur_p, carte):
     	
  		boule.Boule.__init__(self, 500, 25, p0, complex(0, 30), complex(0, 0.15), 0.5, 0.03, "personnage")
@@ -62,6 +63,45 @@ class Personnage(boule.Boule):
 
 	def StopVertical(self):
 		self.v = complex(self.v.real, 0)
+
+        
+        def evolution(self,key):
+                if key == 1 : #droite
+                        self.v = complex(self.vel_moving, self.v.imag)
+                elif key == 2 : #gauche
+                        self.v = complex(-self.vel_moving, self.v.imag)
+                elif key == 3 : #jump
+                        if self.jump == False :
+                                self.v = complex(self.v.real , -self.vel_jumping)
+                                self.jump = True
+                elif key == 5  : # fire
+                        self.feu = True
+                        if self.position == 1 : # gauche
+                                self.moteur_p.ajouter_particule(100, 10, 0, self.p.real, self.screen_height-100, 10, "img/fire.png", 80,720,100,0)
+                        else : # droite
+                                self.moteur_p.ajouter_particule(100, 10, 180, self.p.real, self.screen_height-100, 10, "img/fire2.png", 80,720,100,0)
+
+
+        def Move(self):
+                self.p = complex(self.p.real+self.v.real, self.p.imag)
+                self.v = complex(0, self.v.imag)
+                boule.Boule.Move(self)
+
+           
+        def manage_keys(self, Input):
+                if (Input.IsKeyDown(sf.Key.Right)) : # droite
+                        self.evolution(1)
+                if (Input.IsKeyDown(sf.Key.Left)) : # gauche
+                        self.evolution(2)
+                if (Input.IsKeyDown(sf.Key.Up)) : # haut
+                        self.evolution(3)
+                if (Input.IsKeyDown(sf.Key.A)) : # Touche 1 -- deplacement rapide
+                        self.evolution(4)
+                if (Input.IsKeyDown(sf.Key.S)) : # Touche 2 -- force
+                        self.set_force(10)
+                if (Input.IsKeyDown(sf.Key.E)) : # Touche 3 -- feu au sol
+                        self.evolution(5)
+
 
 
 	def LoadImgs(self):
@@ -268,21 +308,7 @@ ETAIT DANS LE CONSRTUCTEUR
     
     def set_force(self,f):
 	       self.force = f
-           
-    def manage_keys(self, Input):
-            if (Input.IsKeyDown(sf.Key.D)) : # droite
-                self.evolution(1)
-            if (Input.IsKeyDown(sf.Key.Q)) : # gauche
-                self.evolution(2)
-            if (Input.IsKeyDown(sf.Key.Z)) : # haut
-                self.evolution(3)
-            if (Input.IsKeyDown(sf.Key.A)) : # Touche 1 -- deplacement rapide
-                self.evolution(4)
-            if (Input.IsKeyDown(sf.Key.S)) : # Touche 2 -- force
-                self.set_force(10)
-            if (Input.IsKeyDown(sf.Key.E)) : # Touche 3 -- feu au sol
-                self.evolution(5)
-        
+
     def evolution(self,key):
 
         if key == 1 : #droite

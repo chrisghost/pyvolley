@@ -5,6 +5,7 @@ import cmath
 import ig
 import jeu
 import kinput
+import moteur_control
 
 class menu:
 #    window = sf.RenderWindow(sf.VideoMode(800, 600), "pyVolley")
@@ -64,20 +65,21 @@ class menu:
         self.ig.bouton(1, 10, 300, "Quitter", 0)
         self.ig.init_detect()
         
-	self.input = kinput.kInput(self.window)
+	self.control = moteur_control.moteur_control(self, window)
+#   	 self.input = kinput.kInput(self.window)
 #        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.F15, self.none, (False))
-        self.input.AddEvent(sf.Event.KeyReleased, sf.Key.F15, self.none, (False))
+#        self.input.AddEvent(sf.Event.KeyReleased, sf.Key.F15, self.none, (False))
 #        self.input.AddEvent(sf.Event.MouseButtonPressed, sf.Mouse.Count, self.none, (False))
-        self.input.AddEvent(sf.Event.MouseButtonReleased, sf.Mouse.Left, self.none, (False))
+#        self.input.AddEvent(sf.Event.MouseButtonReleased, sf.Mouse.Left, self.none, (False))
         
-	self.input.AddEvent(sf.Event.KeyPressed, sf.Key.N, self.setNext, (1))
-        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.Escape, self.setState, (False))
-        self.input.AddEvent(sf.Event.MouseButtonPressed, sf.Mouse.Left, self.moteur_p.new_meteor, (200, 200,800)) 
+# 	 self.input.AddEvent(sf.Event.KeyPressed, sf.Key.N, self.setNext, (1))
+#        self.input.AddEvent(sf.Event.KeyPressed, sf.Key.Escape, self.setState, (False))
+#        self.input.AddEvent(sf.Event.MouseButtonPressed, sf.Mouse.Left, self.moteur_p.new_meteor, ("_Mouse_X", "_Mouse_Y",800)) 
 						
         while self.state :
         	
-	        	self.input.Scan()
-
+#	        	self.input.Scan()
+			self.control.Scan()
 			self.Next()
 
 			a = self.moteur_p.update_particule()
