@@ -41,11 +41,47 @@ class kInput:
         Supprime l'écoute de l'évènement [type][key]
         """
         self.fonctions[type].pop(key)
- 
+
+
     def Scan(self):
         """
-        Scanne et traite les évènements de la fenêtre.
+        Inspecte les entrées pour exécuter les évènements mémorisés. 
+        A appeler à chaque tour de boucle.
         """
+        event = self.event      #Allège le parcours
+        fonc = self.fonctions
+ 
+        while self.get_events(event):
+ 
+            if fonc.has_key(event.Type):
+                code = None
+                #=== Récuperation du code ===
+                if event.Type == sf.Event.KeyReleased or event.Type == sf.Event.KeyPressed:
+                    code = event.Key.Code
+                elif event.Type == sf.Event.MouseButtonPressed or event.Type == sf.Event.MouseButtonReleased:
+                    code = event.MouseButton.Button
+                elif event.Type == sf.Event.JoyButtonPressed or event.Type == sf.Event.JoyButtonReleased:
+                    code = sf.Event.JoyButton.Button
+                elif event.Type == sf.Event.JoyMoved:
+                    code = event.JoyMove.Axis
+ 
+                #=== Execution de la bonne fonction ===
+                if fonc[event.Type].has_key(code):
+			arguments = []
+			for sub in fonc[event.Type][code][1]:
+				if sub == "_Mouse_X":
+					arguments.append(event.MouseButton.X)
+				elif sub == "_Mouse_Y":
+					arguments.append(event.MouseButton.Y)
+				else:
+					arguments.append(sub)
+
+			arguments[-1] = " "
+			fonc[event.Type][code][0](arguments)
+
+"""
+ 
+    def Scan(self):
         event = self.event
         fonc = self.fonctions
         code = None
@@ -69,3 +105,5 @@ class kInput:
 				print "code in"
 				print self.fonctions[event.Type][code][0], self.fonctions[event.Type][code][1]
     	    	       		self.fonctions[event.Type][code][0](event, self.fonctions[event.Type][code][1])
+
+"""

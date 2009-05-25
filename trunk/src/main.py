@@ -18,6 +18,7 @@ window.PreserveOpenGLStates(False) #OptimizeForNonOpenGL(True)
 
 #cache le pointeur de la souris
 window.ShowMouseCursor(False)
+window.EnableKeyRepeat(True)
 
 i = sf.Image()
 i.LoadFromFile("img/loading.png")

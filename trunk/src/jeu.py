@@ -6,6 +6,7 @@ import ball
 import obstacle
 import moteur_particule
 import moteur_collision
+import moteur_control
 import map
 
 class jeu:
@@ -44,7 +45,11 @@ class jeu:
         self.t1 = 1
         self.t2 = 2
         self.i=0
-        
+       
+	self.control = moteur_control.moteur_control(self, window)
+	self.control.addplayer(self.j1)
+
+ 
         while self.state and self.window.IsOpened():
             event = sf.Event()
             while self.window.GetEvent(event):
@@ -54,10 +59,11 @@ class jeu:
             self.iteration(Input)
             self.moteur_c.update()
             self.afficher_tout()
+            self.control.Scan()
             ig.fps()
         
-    def iteration(self, Input):            
-             #self.j1.manage_keys(Input)
+    def iteration(self, Input):
+             self.j1.manage_keys(Input)
              pass
         
     def afficher_tout(self):
